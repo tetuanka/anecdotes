@@ -19,10 +19,12 @@ jobs:
           node-version: '16'
       - name: install
         run: npm install
+      - name: test
+        run: npm run test
       - name: lint
         run: npm run eslint
-      #- name: build
-      #  run: npm run build
+      - name: build
+        run: npm run build
       #- name: Notify Discord on build failure
       #  uses: rjstone/discord-webhook-notify@v1
       #  if: failure()
