@@ -6,15 +6,7 @@
 app = "routed-anecdotes"
 primary_region = "arn"
 
-[deploy]
-  release_command = "npm run build"
-
-[processes]
-  app = "node app.js"
-
 [build]
-  [build.args]
-    NODE_VERSION = "16.19.0"
 
 [env]
   PORT = "3000"
