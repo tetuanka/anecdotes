@@ -26,14 +26,14 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-      #- name: Notify Discord on build failure
-      #  uses: rjstone/discord-webhook-notify@v1
-      #  if: failure()
-      #  with:
-      #    severity: error
-      #    description: commit [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}) by ${{ github.actor }} broke the build
-      #    text: Build failed
-      #    webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Notify Discord on build failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          description: commit [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}) by ${{ github.actor }} broke the build
+          text: Build failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
@@ -51,5 +51,5 @@ jobs:
         uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
     if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), 'skip')}}
